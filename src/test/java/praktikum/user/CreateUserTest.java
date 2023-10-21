@@ -1,5 +1,7 @@
 package praktikum.user;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
@@ -17,6 +19,8 @@ public class CreateUserTest {
         }
     }
     @Test
+    @DisplayName("Check successfully post /api/auth/register")
+    @Description("Possible created user with correct data")
     public void createUserPositiveTest(){
         var user = genericUserRandom();
         ValidatableResponse createResponse = client.createUser(user);

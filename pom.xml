@@ -16,7 +16,6 @@
         <allure.version>2.21.0</allure.version>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -123,6 +122,5 @@
             </plugins>
         </pluginManagement>
     </build>
-
 
 </project>

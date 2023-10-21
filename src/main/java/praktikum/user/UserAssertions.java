@@ -2,8 +2,6 @@ package praktikum.user;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import org.aspectj.lang.annotation.After;
-
 import java.net.HttpURLConnection;
 
 import static org.hamcrest.Matchers.is;
@@ -11,6 +9,7 @@ import static org.hamcrest.Matchers.notNullValue;
 
 public class UserAssertions {
 
+    @Step("Check of successfully created new User from random")
     public String createdSuccessfully(ValidatableResponse response) {
         String accessToken = response
                 .assertThat()
@@ -22,7 +21,7 @@ public class UserAssertions {
                 .extract().path("accessToken");
         return accessToken;
     }
-    @Step("Check of successfully deleted Courier")
+    @Step("Check of successfully deleted User")
     public void deletedSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
