@@ -31,7 +31,7 @@ public class CreateUserTest {
     @Test
     @DisplayName("Check unsuccessfully post /api/auth/register by twin user")
     @Description("Impossible created twin user")
-    public void userTwinsCreated (){
+    public void userTwinsCreatedTest (){
         var user = genericUserRandom();
         ValidatableResponse createResponse = client.createUser(user);
         accessToken = check.createdSuccessfully(createResponse);

@@ -14,7 +14,7 @@ public class CreateUserNegativeTest {
     @Test
     @DisplayName("Check unsuccessfully post /api/auth/register with empty email")
     @Description("Impossible created user with empty email")
-    public void userEmptyEmailCreated(){
+    public void userEmptyEmailCreatedTest(){
         var user = genericUserRandom();
         user.setEmail("");
         ValidatableResponse createEmptyFieldResponse = client.createUser(user);
@@ -23,7 +23,7 @@ public class CreateUserNegativeTest {
     @Test
     @DisplayName("Check unsuccessfully post /api/auth/register with empty password")
     @Description("Impossible created user with empty password")
-    public void userEmptyPassCreated(){
+    public void userEmptyPassCreatedTest(){
         var user = genericUserRandom();
         user.setPassword("");
         ValidatableResponse createEmptyFieldResponse = client.createUser(user);
@@ -32,7 +32,7 @@ public class CreateUserNegativeTest {
     @Test
     @DisplayName("Check unsuccessfully post /api/auth/register with empty name")
     @Description("Impossible created user with empty name")
-    public void userEmptyNameCreated(){
+    public void userEmptyNameCreatedTest(){
         var user = genericUserRandom();
         user.setName("");
         ValidatableResponse createEmptyFieldResponse = client.createUser(user);

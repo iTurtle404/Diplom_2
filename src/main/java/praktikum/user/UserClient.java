@@ -4,10 +4,6 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import praktikum.Client;
 
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.util.Map;
-
 import static praktikum.constant.URLForEndpoint.*;
 
 public class UserClient extends Client {
@@ -35,6 +31,15 @@ public class UserClient extends Client {
                 .body(cred)
                 .when()
                 .post(USER_LOGIN_PATH)
+                .then().log().all();
+    }
+@Step("Changed Users Data")
+    public ValidatableResponse changeUserData(User user, String accessToken) {
+        return spec()
+                .body(user)
+                .header("Authorization", accessToken)
+                .when()
+                .patch(USER_PATH)
                 .then().log().all();
     }
 }

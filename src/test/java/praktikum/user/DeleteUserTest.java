@@ -13,7 +13,7 @@ public class DeleteUserTest {
     private String accessToken;
 
     @Test
-    @DisplayName("Check successfully delete api/auth/register with correct accessToken")
+    @DisplayName("Check successfully delete api/auth/user with correct accessToken")
     @Description("Possible delete user with correct accessToken")
     public void deleteUserPositiveTest() {
         var user = genericUserRandom();

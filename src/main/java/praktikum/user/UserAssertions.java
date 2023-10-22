@@ -5,10 +5,13 @@ import io.restassured.response.ValidatableResponse;
 import praktikum.constant.Message;
 
 import java.net.HttpURLConnection;
+import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
+import static praktikum.constant.Message.ERROR_UPDATE_DATA;
 
 public class UserAssertions {
+
 
     @Step("Check of successfully created new User from random")
     public String createdSuccessfully(ValidatableResponse response) {
@@ -60,5 +63,22 @@ public class UserAssertions {
                 .and()
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
 
+    }
+
+    public void loggedIncorrectDataUnsuccessfully(ValidatableResponse response) {
+        response
+                .assertThat()
+                .body("success",is(false))
+                .body("message", equalTo(Message.LOGGED_NOT_EXIST_DATA))
+                .and()
+                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
+    }
+
+    public void changedUserDataSuccessfully(ValidatableResponse response) {
+        response
+                .assertThat()
+                .body("success",is(true))
+                .and()
+                .statusCode(HttpURLConnection.HTTP_OK);
     }
 }
