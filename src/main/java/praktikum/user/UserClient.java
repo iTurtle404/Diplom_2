@@ -4,14 +4,15 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import praktikum.Client;
 
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.util.Map;
 
-import static praktikum.constant.URLForEndpoint.USER_PATH;
-import static praktikum.constant.URLForEndpoint.USER_REGISTER;
+import static praktikum.constant.URLForEndpoint.*;
 
 public class UserClient extends Client {
 
-@Step ("Created new User from random")
+    @Step ("Created new User from random")
     public ValidatableResponse createUser(User user) {
         return spec()
                 .body(user)
@@ -25,6 +26,15 @@ public class UserClient extends Client {
                 .header("Authorization", accessToken)
                 .when()
                 .delete(USER_PATH)
+                .then().log().all();
+    }
+
+@Step("Logged User")
+    public ValidatableResponse loginUser(Credentials cred) {
+        return spec()
+                .body(cred)
+                .when()
+                .post(USER_LOGIN_PATH)
                 .then().log().all();
     }
 }
