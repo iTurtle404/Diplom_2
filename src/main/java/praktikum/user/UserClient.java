@@ -13,7 +13,15 @@ public class UserClient extends Client {
         return spec()
                 .body(user)
                 .when()
-                .post(USER_REGISTER)
+                .post(USER_REGISTER_PATH)
+                .then().log().all();
+    }
+    @Step ("Created another new User from random")
+    public ValidatableResponse createAnotherUser(User anotherUser) {
+        return spec()
+                .body(anotherUser)
+                .when()
+                .post(USER_REGISTER_PATH)
                 .then().log().all();
     }
 @Step ("Deleted User with accessToken")
@@ -38,6 +46,14 @@ public class UserClient extends Client {
         return spec()
                 .body(user)
                 .header("Authorization", accessToken)
+                .when()
+                .patch(USER_PATH)
+                .then().log().all();
+    }
+
+    public ValidatableResponse changeDataUnauthUser(User user) {
+        return spec()
+                .body(user)
                 .when()
                 .patch(USER_PATH)
                 .then().log().all();

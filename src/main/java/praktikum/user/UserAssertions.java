@@ -81,4 +81,24 @@ public class UserAssertions {
                 .and()
                 .statusCode(HttpURLConnection.HTTP_OK);
     }
+
+    public void changedDataUnauthUserUnuccessfully(ValidatableResponse response) {
+        response
+                .assertThat()
+                .body("success",is(false))
+                .body("message", equalTo(Message.NEED_AUTH_MSG ))
+                .and()
+                .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
+
+    }
+
+    public void changedUserExistEmailUnsuccessfully(ValidatableResponse response) {
+        response
+                .assertThat()
+                .body("success",is(false))
+                .body("message", equalTo(Message.ERROR_EMAIL_EXIST))
+                .and()
+                .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
+
+    }
 }
