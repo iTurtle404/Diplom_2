@@ -8,5 +8,6 @@ public class URLForEndpoint {
     public static final String USER_LOGIN_PATH = BASE_API + "auth/login";
     public static final String USER_ORDERS = BASE_API + "orders";
     public static final String INGREDIENTS_PATH = BASE_API + "ingredients";
+    public static final String GET_ORDERS_PATH = BASE_API + "orders";
 
 }

@@ -10,4 +10,5 @@ public class Message {
     public static final String ERROR_EMAIL_EXIST = "User with such email already exists";
     public static final String WRONG_NOT_EQUALS_TOKEN = "these Tokens should be not equals";
     public static final String ERROR_CREATE_ORDER_MSG = "Order is not created";
+    public static final String ERROR_INGREDIENTS_ORDER_MSG = "Ingredient ids must be provided";
 }

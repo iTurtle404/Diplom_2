@@ -8,7 +8,7 @@ import static praktikum.constant.URLForEndpoint.*;
 
 public class UserClient extends Client {
 
-    @Step ("Created new User from random")
+@Step ("Created new User from random")
     public ValidatableResponse createUser(User user) {
         return spec()
                 .body(user)
@@ -16,7 +16,7 @@ public class UserClient extends Client {
                 .post(USER_REGISTER_PATH)
                 .then().log().all();
     }
-    @Step ("Created another new User from random")
+@Step ("Created another new User from random")
     public ValidatableResponse createAnotherUser(User anotherUser) {
         return spec()
                 .body(anotherUser)
@@ -41,7 +41,7 @@ public class UserClient extends Client {
                 .post(USER_LOGIN_PATH)
                 .then().log().all();
     }
-@Step("Changed Users Data")
+@Step("Changed authorized Users Data")
     public ValidatableResponse changeUserData(User user, String accessToken) {
         return spec()
                 .body(user)
@@ -50,7 +50,7 @@ public class UserClient extends Client {
                 .patch(USER_PATH)
                 .then().log().all();
     }
-
+@Step("Changed Unauthorized Users Data")
     public ValidatableResponse changeDataUnauthUser(User user) {
         return spec()
                 .body(user)

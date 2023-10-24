@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static praktikum.user.UserGenerator.generatorRandomString;
 
 public class Ingredients {
     public ArrayList<Object> ingredients;
@@ -34,5 +35,21 @@ public class Ingredients {
         ingredients.add(fillings.get(fillingIndex));
 
         return new Ingredients(ingredients);
+    }
+    public static Ingredients getWithoutIngredients() {
+        ArrayList<Object> ingredients = new ArrayList<>();
+        return new Ingredients(ingredients);
+    }
+    public static Ingredients getInvalidHash(){
+        ArrayList<Object> ingredients = new ArrayList<>();
+        ingredients.add(generatorRandomString());
+        ingredients.add(generatorRandomString());
+        ingredients.add(generatorRandomString());
+        ingredients.add(generatorRandomString());
+        ingredients.add(generatorRandomString());
+        ingredients.add(generatorRandomString());
+        ingredients.add(generatorRandomString());
+        return new Ingredients(ingredients);
+
     }
 }
