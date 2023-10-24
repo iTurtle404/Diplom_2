@@ -2,11 +2,8 @@ package praktikum.ingredients;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import praktikum.constant.Message;
-
 import java.net.HttpURLConnection;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 public class IngredientsAssertion {

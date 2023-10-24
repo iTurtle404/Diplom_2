@@ -15,7 +15,6 @@ public class GetOrderTest {
     private final OrderClient orderClient = new OrderClient();
     private final UserAssertions userCheck = new UserAssertions();
     private final OrderAssertion orderCheck  = new OrderAssertion();
-    private String accessToken;
 
     @Test
     @DisplayName("Get all order with login")
@@ -25,7 +24,7 @@ public class GetOrderTest {
         userClient.createUser(user);
         var creds = Credentials.from(user);
         ValidatableResponse loginResponse = userClient.loginUser(creds);
-        accessToken = userCheck.loggedSuccessfully(loginResponse);
+        String accessToken = userCheck.loggedSuccessfully(loginResponse);
 
         ValidatableResponse getOrderResponse = orderClient.getAllOrderUser(accessToken);
         orderCheck.getAllOrderSuccessfully(getOrderResponse );

@@ -10,7 +10,6 @@ import static praktikum.user.UserGenerator.genericUserRandom;
 public class DeleteUserTest {
     private final UserClient client = new UserClient();
     private final UserAssertions check = new UserAssertions();
-    private String accessToken;
 
     @Test
     @DisplayName("Check successfully delete api/auth/user with correct accessToken")
@@ -18,7 +17,7 @@ public class DeleteUserTest {
     public void deleteUserPositiveTest() {
         var user = genericUserRandom();
         ValidatableResponse createResponse = client.createUser(user);
-        accessToken = check.createdSuccessfully(createResponse);
+        String accessToken = check.createdSuccessfully(createResponse);
         ValidatableResponse delete = client.deleteUser(accessToken);
         check.deletedSuccessfully(delete);
 

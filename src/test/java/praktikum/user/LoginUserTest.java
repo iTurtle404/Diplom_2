@@ -21,7 +21,7 @@ public class LoginUserTest {
 
     @Test
     @DisplayName("Check successfully post /api/auth/login")
-    @Description("Possible logged courier with correct data")
+    @Description("Possible logged user with correct data")
     public void userLoggedPositiveTest() {
         var user = genericUserRandom();
         client.createUser(user);

@@ -3,12 +3,9 @@ package praktikum.user;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import praktikum.constant.Message;
-
 import java.net.HttpURLConnection;
-import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
-import static praktikum.constant.Message.ERROR_UPDATE_DATA;
 
 public class UserAssertions {
 
@@ -46,6 +43,7 @@ public class UserAssertions {
         return accessToken;
     }
 
+    @Step("Check of unsuccessfully created twins User")
     public void createdTwinUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
@@ -54,7 +52,7 @@ public class UserAssertions {
                 .and()
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
     }
-
+    @Step("Check of unsuccessfully created User with empty field")
     public void createdEmptyFieldUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
@@ -65,6 +63,7 @@ public class UserAssertions {
 
     }
 
+    @Step("Check of unsuccessfully logged User with incorrect data")
     public void loggedIncorrectDataUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
@@ -74,6 +73,7 @@ public class UserAssertions {
                 .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
     }
 
+    @Step("Check of successfully changed Users data")
     public void changedUserDataSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
@@ -81,7 +81,7 @@ public class UserAssertions {
                 .and()
                 .statusCode(HttpURLConnection.HTTP_OK);
     }
-
+    @Step("Check of unsuccessfully changed Users data by unauthorized user")
     public void changedDataUnauthUserUnuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
@@ -89,9 +89,8 @@ public class UserAssertions {
                 .body("message", equalTo(Message.NEED_AUTH_MSG ))
                 .and()
                 .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
-
     }
-
+    @Step("Check of unsuccessfully changed Users data by exist users email")
     public void changedUserExistEmailUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
@@ -99,6 +98,5 @@ public class UserAssertions {
                 .body("message", equalTo(Message.ERROR_EMAIL_EXIST))
                 .and()
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
-
     }
 }
