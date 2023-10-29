@@ -20,8 +20,5 @@ public class DeleteUserTest {
         String accessToken = check.createdSuccessfully(createResponse);
         ValidatableResponse delete = client.deleteUser(accessToken);
         check.deletedSuccessfully(delete);
-
     }
-
-
 }

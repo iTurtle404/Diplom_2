@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import praktikum.ingredients.Ingredients;
 import praktikum.user.Credentials;
@@ -18,11 +19,17 @@ public class CreateOrderTest {
     private final UserAssertions userCheck = new UserAssertions();
     private final OrderAssertion orderCheck  = new OrderAssertion();
     private Ingredients ingredients;
-    private Ingredients withoutIngredients;
     private String accessToken;
-    private final String emptyAccessToken = "";
-    private int orderNumber;
 
+    @Before
+    public void setUp() {
+        var user = genericUserRandom();
+        userClient.createUser(user);
+        var creds = Credentials.from(user);
+        ValidatableResponse loginResponse = userClient.loginUser(creds);
+        accessToken = userCheck.loggedSuccessfully(loginResponse);
+
+    }
     @After
     public void tearDown() {
         if (accessToken != null) {
@@ -34,28 +41,11 @@ public class CreateOrderTest {
     @DisplayName("Create order with ingredients, with login")
     @Description("Possible create order with ingredients,  with login")
     public void createOrderWithIngredientsWithLogin() {
-        var user = genericUserRandom();
-        userClient.createUser(user);
-        var creds = Credentials.from(user);
-        ValidatableResponse loginResponse = userClient.loginUser(creds);
-        accessToken = userCheck.loggedSuccessfully(loginResponse);
 
         ingredients = Ingredients.getIngredients();
+
         ValidatableResponse createOrderResponse = orderClient.createOrder(ingredients, accessToken);
-        orderNumber = orderCheck.createdOrderSuccessfully(createOrderResponse);
-        assert orderNumber != 0;
-    }
-    @Test
-    @DisplayName("Create order with ingredients, without login")
-    @Description("Possible create order with ingredients,  without login")
-    public void createOrderWithIngredientsWithoutLogin() {
-        var user = genericUserRandom();
-        ValidatableResponse createResponse = userClient.createUser(user);
-        accessToken = userCheck.createdSuccessfully(createResponse);
-
-        ingredients = Ingredients.getIngredients();
-        ValidatableResponse createOrderResponse = orderClient.createOrder(ingredients, emptyAccessToken);
-        orderNumber = orderCheck.createdOrderSuccessfully(createOrderResponse);
+        int orderNumber = orderCheck.createdOrderSuccessfully(createOrderResponse);
         assert orderNumber != 0;
     }
 
@@ -63,27 +53,10 @@ public class CreateOrderTest {
     @DisplayName("Create order without ingredients, with login")
     @Description("Impossible create order without ingredients,  with login")
     public void createOrderWithoutIngredientsWithLogin() {
-        var user = genericUserRandom();
-        userClient.createUser(user);
-        var creds = Credentials.from(user);
-        ValidatableResponse loginResponse = userClient.loginUser(creds);
-        accessToken = userCheck.loggedSuccessfully(loginResponse);
 
-        withoutIngredients = Ingredients.getWithoutIngredients();
+        Ingredients withoutIngredients = Ingredients.getWithoutIngredients();
+
         ValidatableResponse createOrderResponse = orderClient.createOrder(withoutIngredients, accessToken);
-        orderCheck.createdOrderWithoutIngredientsUnuccessfully(createOrderResponse);
-    }
-
-    @Test
-    @DisplayName("Create order without ingredients, without login")
-    @Description("Impossible create order without ingredients,  without login")
-    public void createOrderWithoutIngredientsWithoutLogin() {
-        var user = genericUserRandom();
-        ValidatableResponse createResponse = userClient.createUser(user);
-        accessToken = userCheck.createdSuccessfully(createResponse);
-
-        withoutIngredients = Ingredients.getWithoutIngredients();
-        ValidatableResponse createOrderResponse = orderClient.createOrder(withoutIngredients, emptyAccessToken);
         orderCheck.createdOrderWithoutIngredientsUnuccessfully(createOrderResponse);
     }
 
@@ -91,13 +64,9 @@ public class CreateOrderTest {
     @DisplayName("Create order with Invalid Hash, with login")
     @Description("Impossible create with Invalid Hash, with login")
     public void createOrderWithInvalidHashWithLogin(){
-        var user = genericUserRandom();
-        userClient.createUser(user);
-        var creds = Credentials.from(user);
-        ValidatableResponse loginResponse = userClient.loginUser(creds);
-        accessToken = userCheck.loggedSuccessfully(loginResponse);
 
         ingredients = Ingredients.getInvalidHash();
+
         ValidatableResponse createOrderResponse = orderClient.createOrder(ingredients, accessToken);
         orderCheck.createdOrderWithIvalidHashUnuccessfully(createOrderResponse);
     }
