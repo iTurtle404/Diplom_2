@@ -10,7 +10,7 @@ import static praktikum.user.UserGenerator.generatorRandomString;
 
 public class Ingredients {
     public ArrayList<Object> ingredients;
-    public Ingredients(ArrayList<Object> ingredients) {
+    private Ingredients(ArrayList<Object> ingredients) {
             this.ingredients = ingredients;
     }
     public static Ingredients getIngredients() {
