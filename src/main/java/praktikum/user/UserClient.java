@@ -16,14 +16,6 @@ public class UserClient extends Client {
                 .post(USER_REGISTER_PATH)
                 .then().log().all();
     }
-@Step ("Created another new User from random")
-    public ValidatableResponse createAnotherUser(User anotherUser) {
-        return spec()
-                .body(anotherUser)
-                .when()
-                .post(USER_REGISTER_PATH)
-                .then().log().all();
-    }
 @Step ("Deleted User with accessToken")
     public ValidatableResponse deleteUser(String accessToken) {
         return spec()

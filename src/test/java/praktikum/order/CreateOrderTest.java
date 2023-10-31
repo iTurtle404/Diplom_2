@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import praktikum.ingredients.Ingredients;
@@ -27,7 +28,7 @@ public class CreateOrderTest {
         userClient.createUser(user);
         var creds = Credentials.from(user);
         ValidatableResponse loginResponse = userClient.loginUser(creds);
-        accessToken = userCheck.loggedSuccessfully(loginResponse);
+        accessToken = userCheck.logSuccessfully(loginResponse);
 
     }
     @After
@@ -46,7 +47,7 @@ public class CreateOrderTest {
 
         ValidatableResponse createOrderResponse = orderClient.createOrder(ingredients, accessToken);
         int orderNumber = orderCheck.createdOrderSuccessfully(createOrderResponse);
-        assert orderNumber != 0;
+        Assert.assertNotEquals(0,orderNumber);
     }
 
     @Test
@@ -54,9 +55,9 @@ public class CreateOrderTest {
     @Description("Impossible create order without ingredients,  with login")
     public void createOrderWithoutIngredientsWithLogin() {
 
-        Ingredients withoutIngredients = Ingredients.getWithoutIngredients();
+        ingredients = Ingredients.getWithoutIngredients();
 
-        ValidatableResponse createOrderResponse = orderClient.createOrder(withoutIngredients, accessToken);
+        ValidatableResponse createOrderResponse = orderClient.createOrder(ingredients, accessToken);
         orderCheck.createdOrderWithoutIngredientsUnuccessfully(createOrderResponse);
     }
 

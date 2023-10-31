@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.is;
 
 public class IngredientsAssertion {
     @Step ("Check of successfully get Ingredients")
-    public void gettingIngredientsSuccessfully(ValidatableResponse response) {
+    public void getIngredientsSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(true))

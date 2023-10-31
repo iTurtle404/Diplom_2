@@ -32,7 +32,7 @@ public class CreateUserTest {
     public void createUserPositiveTest(){
 
         ValidatableResponse createResponse = client.createUser(user);
-        accessToken = check.createdSuccessfully(createResponse);
+        accessToken = check.createSuccessfully(createResponse);
     }
 
     @Test
@@ -41,9 +41,9 @@ public class CreateUserTest {
     public void userTwinsCreatedTest (){
 
         ValidatableResponse createResponse = client.createUser(user);
-        accessToken = check.createdSuccessfully(createResponse);
+        accessToken = check.createSuccessfully(createResponse);
 
         ValidatableResponse createTwinRespone  = client.createUser(user);
-        check.createdTwinUnsuccessfully(createTwinRespone);
+        check.createTwinUnsuccessfully(createTwinRespone);
     }
 }

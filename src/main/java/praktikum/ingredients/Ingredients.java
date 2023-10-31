@@ -24,7 +24,7 @@ public class Ingredients {
         int fillingIndex = nextInt(0, 9);
 
         ValidatableResponse gettingResponse = client.getIngredients();
-        check.gettingIngredientsSuccessfully(gettingResponse);
+        check.getIngredientsSuccessfully(gettingResponse);
 
         List<Object> buns = gettingResponse.extract().jsonPath().getList("data.findAll{it.type == 'bun'}._id");
         List<Object> sauces = gettingResponse.extract().jsonPath().getList("data.findAll{it.type == 'sauce'}._id");

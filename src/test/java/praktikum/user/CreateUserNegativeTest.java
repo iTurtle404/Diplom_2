@@ -26,7 +26,7 @@ public class CreateUserNegativeTest {
         user.setEmail("");
 
         ValidatableResponse createEmptyFieldResponse = client.createUser(user);
-        check.createdEmptyFieldUnsuccessfully(createEmptyFieldResponse);
+        check.createEmptyFieldUnsuccessfully(createEmptyFieldResponse);
     }
     @Test
     @DisplayName("Check unsuccessfully post /api/auth/register with empty password")
@@ -36,7 +36,7 @@ public class CreateUserNegativeTest {
         user.setPassword("");
 
         ValidatableResponse createEmptyFieldResponse = client.createUser(user);
-        check.createdEmptyFieldUnsuccessfully(createEmptyFieldResponse);
+        check.createEmptyFieldUnsuccessfully(createEmptyFieldResponse);
     }
     @Test
     @DisplayName("Check unsuccessfully post /api/auth/register with empty name")
@@ -46,6 +46,6 @@ public class CreateUserNegativeTest {
         user.setName("");
 
         ValidatableResponse createEmptyFieldResponse = client.createUser(user);
-        check.createdEmptyFieldUnsuccessfully(createEmptyFieldResponse);
+        check.createEmptyFieldUnsuccessfully(createEmptyFieldResponse);
     }
 }

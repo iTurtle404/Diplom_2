@@ -11,7 +11,7 @@ public class UserAssertions {
 
 
     @Step("Check of successfully created new User from random")
-    public String createdSuccessfully(ValidatableResponse response) {
+    public String createSuccessfully(ValidatableResponse response) {
         String accessToken = response
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
@@ -23,7 +23,7 @@ public class UserAssertions {
         return accessToken;
     }
     @Step("Check of successfully deleted User")
-    public void deletedSuccessfully(ValidatableResponse response) {
+    public void deleteSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_ACCEPTED)
@@ -31,7 +31,7 @@ public class UserAssertions {
                 .body("message", equalTo(Message.SUCCESS_REMOVED));
     }
     @Step("Check of successfully logged User")
-    public String loggedSuccessfully(ValidatableResponse response) {
+    public String logSuccessfully(ValidatableResponse response) {
         String accessToken = response
                 .assertThat()
                 .statusCode(HttpURLConnection.HTTP_OK)
@@ -44,7 +44,7 @@ public class UserAssertions {
     }
 
     @Step("Check of unsuccessfully created twins User")
-    public void createdTwinUnsuccessfully(ValidatableResponse response) {
+    public void createTwinUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(false))
@@ -53,7 +53,7 @@ public class UserAssertions {
                 .statusCode(HttpURLConnection.HTTP_FORBIDDEN);
     }
     @Step("Check of unsuccessfully created User with empty field")
-    public void createdEmptyFieldUnsuccessfully(ValidatableResponse response) {
+    public void createEmptyFieldUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(false))
@@ -64,7 +64,7 @@ public class UserAssertions {
     }
 
     @Step("Check of unsuccessfully logged User with incorrect data")
-    public void loggedIncorrectDataUnsuccessfully(ValidatableResponse response) {
+    public void logIncorrectDataUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(false))
@@ -74,7 +74,7 @@ public class UserAssertions {
     }
 
     @Step("Check of successfully changed Users data")
-    public void changedUserDataSuccessfully(ValidatableResponse response) {
+    public void changeUserDataSuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(true))
@@ -82,7 +82,7 @@ public class UserAssertions {
                 .statusCode(HttpURLConnection.HTTP_OK);
     }
     @Step("Check of unsuccessfully changed Users data by unauthorized user")
-    public void changedDataUnauthUserUnuccessfully(ValidatableResponse response) {
+    public void changeDataUnauthUserUnuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(false))
@@ -91,7 +91,7 @@ public class UserAssertions {
                 .statusCode(HttpURLConnection.HTTP_UNAUTHORIZED);
     }
     @Step("Check of unsuccessfully changed Users data by exist users email")
-    public void changedUserExistEmailUnsuccessfully(ValidatableResponse response) {
+    public void changeUserExistEmailUnsuccessfully(ValidatableResponse response) {
         response
                 .assertThat()
                 .body("success",is(false))

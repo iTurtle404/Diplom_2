@@ -17,8 +17,8 @@ public class DeleteUserTest {
     public void deleteUserPositiveTest() {
         var user = genericUserRandom();
         ValidatableResponse createResponse = client.createUser(user);
-        String accessToken = check.createdSuccessfully(createResponse);
+        String accessToken = check.createSuccessfully(createResponse);
         ValidatableResponse delete = client.deleteUser(accessToken);
-        check.deletedSuccessfully(delete);
+        check.deleteSuccessfully(delete);
     }
 }

@@ -22,7 +22,7 @@ public class ChangeUserDataUnauthTest {
     public void setUp() {
         user = genericUserRandom();
         ValidatableResponse createResponse = client.createUser(user);
-        accessToken = check.createdSuccessfully(createResponse);
+        accessToken = check.createSuccessfully(createResponse);
     }
 
     @After
@@ -40,7 +40,7 @@ public class ChangeUserDataUnauthTest {
         user.setEmail(generatorRandomString()+DOMAIN);
 
         ValidatableResponse changeDataUnauthUserResponse = client.changeDataUnauthUser(user);
-        check.changedDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
+        check.changeDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
     }
     @Test
     @DisplayName("Check unsuccessfully patch /api/auth/user")
@@ -50,7 +50,7 @@ public class ChangeUserDataUnauthTest {
         user.setName(generatorRandomString());
 
         ValidatableResponse changeDataUnauthUserResponse = client.changeDataUnauthUser(user);
-        check.changedDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
+        check.changeDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
     }
     @Test
     @DisplayName("Check unsuccessfully patch /api/auth/user")
@@ -60,7 +60,7 @@ public class ChangeUserDataUnauthTest {
         user.setPassword(generatorRandomString());
 
         ValidatableResponse changeDataUnauthUserResponse = client.changeDataUnauthUser(user);
-        check.changedDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
+        check.changeDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ChangeUserDataUnauthTest {
         user.setName(generatorRandomString());
 
         ValidatableResponse changeDataUnauthUserResponse = client.changeDataUnauthUser(user);
-        check.changedDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
+        check.changeDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
     }
 
     @Test
@@ -82,13 +82,13 @@ public class ChangeUserDataUnauthTest {
     public  void changeUserEmailWithExistEmailUnauthTest(){
 
         var anotherUser = genericUserRandom();
-        ValidatableResponse createAnotherResponse = client.createAnotherUser(anotherUser);
-        String anotherAccessToken = check.createdSuccessfully(createAnotherResponse);
+        ValidatableResponse createAnotherResponse = client.createUser(anotherUser);
+        String anotherAccessToken = check.createSuccessfully(createAnotherResponse);
 
         user.setEmail(anotherUser.getEmail());
 
         ValidatableResponse changeDataUnauthUserResponse = client.changeDataUnauthUser(user);
-        check.changedDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
+        check.changeDataUnauthUserUnuccessfully(changeDataUnauthUserResponse);
 
         Assert.assertNotEquals(WRONG_NOT_EQUALS_TOKEN, accessToken, anotherAccessToken);
         client.deleteUser(anotherAccessToken);

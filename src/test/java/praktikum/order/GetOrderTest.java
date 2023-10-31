@@ -24,7 +24,7 @@ public class GetOrderTest {
         userClient.createUser(user);
         var creds = Credentials.from(user);
         ValidatableResponse loginResponse = userClient.loginUser(creds);
-        String accessToken = userCheck.loggedSuccessfully(loginResponse);
+        String accessToken = userCheck.logSuccessfully(loginResponse);
 
         ValidatableResponse getOrderResponse = orderClient.getAllOrderUser(accessToken);
         orderCheck.getAllOrderSuccessfully(getOrderResponse );

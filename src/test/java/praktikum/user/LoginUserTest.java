@@ -35,7 +35,7 @@ public class LoginUserTest {
         client.createUser(user);
 
         ValidatableResponse loginResponse = client.loginUser(creds);
-        accessToken = check.loggedSuccessfully(loginResponse);
+        accessToken = check.logSuccessfully(loginResponse);
     }
 
     @Test
@@ -44,7 +44,7 @@ public class LoginUserTest {
     public void userLoggedNotExistDataTest(){
 
         ValidatableResponse loginResponse = client.loginUser(creds);
-        check.loggedIncorrectDataUnsuccessfully(loginResponse);
+        check.logIncorrectDataUnsuccessfully(loginResponse);
     }
 
     @Test
@@ -53,13 +53,13 @@ public class LoginUserTest {
     public void userLoggedIncorrectEmailTest(){
 
         ValidatableResponse createResponse = client.createUser(user);
-        accessToken = check.createdSuccessfully(createResponse);
+        accessToken = check.createSuccessfully(createResponse);
 
         user.setEmail(generatorRandomString()+DOMAIN);
         creds = Credentials.from(user);
 
         ValidatableResponse loginResponse = client.loginUser(creds);
-        check.loggedIncorrectDataUnsuccessfully(loginResponse);
+        check.logIncorrectDataUnsuccessfully(loginResponse);
     }
 
     @Test
@@ -68,12 +68,12 @@ public class LoginUserTest {
     public void userLoggedIncorrectPassTest(){
 
         ValidatableResponse createResponse = client.createUser(user);
-        accessToken = check.createdSuccessfully(createResponse);
+        accessToken = check.createSuccessfully(createResponse);
 
         user.setPassword(generatorRandomString());
         creds = Credentials.from(user);
 
         ValidatableResponse loginResponse = client.loginUser(creds);
-        check.loggedIncorrectDataUnsuccessfully(loginResponse);
+        check.logIncorrectDataUnsuccessfully(loginResponse);
     }
 }

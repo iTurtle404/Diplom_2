@@ -34,7 +34,7 @@ public class ChangeUserDataTest {
         client.createUser(user);
         var creds = Credentials.from(user);
         ValidatableResponse loginResponse = client.loginUser(creds);
-        accessToken = check.loggedSuccessfully(loginResponse);
+        accessToken = check.logSuccessfully(loginResponse);
     }
 
     @After
@@ -52,7 +52,7 @@ public class ChangeUserDataTest {
         user.setEmail(updatedEmail);
 
         ValidatableResponse changeDataResponse = client.changeUserData(user, accessToken);
-        check.changedUserDataSuccessfully(changeDataResponse);
+        check.changeUserDataSuccessfully(changeDataResponse);
         checkUpdatedEmail(updatedEmail, changeDataResponse);
     }
 
@@ -65,7 +65,7 @@ public class ChangeUserDataTest {
         user.setName(updatedName);
 
         ValidatableResponse changeDataResponse = client.changeUserData(user, accessToken);
-        check.changedUserDataSuccessfully(changeDataResponse);
+        check.changeUserDataSuccessfully(changeDataResponse);
         checkUpdateName(updatedName, changeDataResponse);
     }
 
@@ -78,7 +78,7 @@ public class ChangeUserDataTest {
         user.setPassword(updatedPass);
 
         ValidatableResponse changeDataResponse = client.changeUserData(user, accessToken);
-        check.changedUserDataSuccessfully(changeDataResponse);
+        check.changeUserDataSuccessfully(changeDataResponse);
         checkUpdatedEmail(user.getEmail(), changeDataResponse);
         checkUpdateName(user.getName(), changeDataResponse);
     }
@@ -98,7 +98,7 @@ public class ChangeUserDataTest {
         user.setPassword(updatedPass);
 
         ValidatableResponse changeDataResponse = client.changeUserData(user, accessToken);
-        check.changedUserDataSuccessfully(changeDataResponse);
+        check.changeUserDataSuccessfully(changeDataResponse);
         checkUpdatedEmail(updatedEmail, changeDataResponse);
         checkUpdateName(updatedName, changeDataResponse);
     }
@@ -108,13 +108,13 @@ public class ChangeUserDataTest {
     public  void changeUserEmailWithExistEmailTest(){
 
         var anotherUser = genericUserRandom();
-        ValidatableResponse createAnotherResponse = client.createAnotherUser(anotherUser);
-        String anotherAccessToken = check.createdSuccessfully(createAnotherResponse);
+        ValidatableResponse createAnotherResponse = client.createUser(anotherUser);
+        String anotherAccessToken = check.createSuccessfully(createAnotherResponse);
 
         user.setEmail(anotherUser.getEmail());
 
         ValidatableResponse changeDataResponse = client.changeUserData(user, accessToken);
-        check.changedUserExistEmailUnsuccessfully(changeDataResponse);
+        check.changeUserExistEmailUnsuccessfully(changeDataResponse);
 
         Assert.assertNotEquals(WRONG_NOT_EQUALS_TOKEN, accessToken, anotherAccessToken);
         client.deleteUser(anotherAccessToken);
